@@ -2,15 +2,18 @@
   (:use [clojure.xml :only (parse)])
   (:gen-class))
 
-(def api-key
-     (get (System/getenv) "LIVEDOOR_GOURMET_API_KEY"))
-
+(def api-key-name "LIVEDOOR_GOURMET_API_KEY")
 (def api-version "v1.0")
-
 (def station-id 2800)
 
+(defn getenv [name]
+  (get (System/getenv) name))
+
+(defn api-key []
+  (getenv api-key-name))
+
 (defn station-page-url [station-id]
-  (str "http://api.gourmet.livedoor.com/" api-version "/restaurant/?api_key=" api-key "&station_id=" station-id "&sort=total"))
+  (str "http://api.gourmet.livedoor.com/" api-version "/restaurant/?api_key=" (api-key) "&station_id=" station-id "&sort=total"))
 
 (defn get-content-by-tag
      "XMLタグのコンテンツ（<hoge>これ</hoge>）を取得する。tag：コンテンツを取得したいタグ名のキーワード（例 :title）、xml-el：xml-seqから取得したXMLエレメント要素"

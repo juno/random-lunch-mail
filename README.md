@@ -14,6 +14,11 @@ Usage
     $ lein deps
     $ LIVEDOOR_GOURMET_API_KEY='YOUR_API_KEY' lein run
 
+Testing
+----
+
+    $ lein test
+
 License
 ----
 
